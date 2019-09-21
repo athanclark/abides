@@ -36,3 +36,5 @@ tests:
     - -with-rtsopts=-N
     dependencies:
     - abides
+    - tasty
+    - tasty-quickcheck
