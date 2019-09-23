@@ -21,6 +21,10 @@ idempotent f x = f (f x) == f x
 distributive :: Eq a => (a -> a) -> (a -> a -> a) -> a -> a -> Bool
 distributive f g x y = f (g x y) == g (f x) (f y)
 
+-- | f (g x y) == g' (f x) (f y)?
+distributive' :: Eq b => (a -> b) -> (a -> a -> a) -> (b -> b -> b) -> a -> a -> Bool
+distributive' f g g' x y = f (g x y) == g' (f x) (f y)
+
 -- | f x y == x? Note: bottom ~ forall y. f bottom y == bottom, while unit ~ forall x. f x unit == x
 constL :: Eq a => (a -> a -> a) -> a -> a -> Bool
 constL f x y = f x y == x

@@ -1,7 +1,7 @@
 module Test.Abides.Control.Monad where
 
-
 import Control.Monad (MonadPlus (mzero, mplus))
+import qualified Test.Abides.Properties as P
 
 
 leftIdentity :: Monad m => Eq (m b) => (a -> m b) -> a -> Bool
@@ -21,4 +21,4 @@ annihilation f = (mzero >>= f) == mzero
 
 
 distributive :: MonadPlus m => Eq (m b) => (a -> m b) -> m a -> m a -> Bool
-distributive f x y = (mplus x y >>= f) == mplus (x >>= f) (y >>= f)
+distributive f = P.distributive' (>>= f) mplus mplus
